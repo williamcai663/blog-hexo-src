@@ -149,6 +149,602 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-20180604" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/04/20180604/">Git的简单使用</a>
+    </h1>
+  
+
+        <a href="/2018/06/04/20180604/" class="archive-article-date">
+  	<time datetime="2018-06-04T14:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-04</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###如果没有初始化的项目，可以通过以下步骤：</p>
+<pre><code>$echo &quot;# kotlinPrimary&quot; &gt;&gt; README.md
+$git init
+$git add README.md
+$git commit -m &quot;first commit&quot;
+$git remote add origin git@github.com:williamcai663/$kotlinPrimary.git
+$git push -u origin master
+</code></pre><p>这样就可以把项目推到库中并生成且提交到master</p>
+<p>###如果存在一个库的项目，直接执行如下命令：<br>    $git remote add origin git@github.com:williamcai663/kotlinPrimary.git<br>    $git push -u origin master</p>
+<p>###如果想从master上开一个develop分支，可以执行如下：<br>    $git checkout -b develop<br>-b 的作用就是创建并切换到develop分支<br>这个新开的分支并没有关联到远程分支，创建远程分支并提交到远程，执行 git push origin develop<br>这样远程就有了一个分支，并且与远程的分支develop没有关联上，<br>可以通过执行如下命令：</p>
+<pre><code>$git branch --set-upstream-to=origin/develop develop
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/04/20180604/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180506elasticsearch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/20180506elasticsearch/">ubuntu搭建elasticsearch和使用</a>
+    </h1>
+  
+
+        <a href="/2018/05/06/20180506elasticsearch/" class="archive-article-date">
+  	<time datetime="2018-05-06T06:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>參考 ：<a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/06/20180506elasticsearch/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180505elasticsearch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/05/20180505elasticsearch/">elasticsearch的安裝</a>
+    </h1>
+  
+
+        <a href="/2018/05/05/20180505elasticsearch/" class="archive-article-date">
+  	<time datetime="2018-05-05T13:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-05</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>– 1.检查jdk安装</p>
+<p>执行命令：java -version<br>如果有java相关信息，说明已经安装。<br>如果没有安装的话，执行命令：yum -y install  java-1.8.0-openjdk<br>– 2.下载elasticsearch安装包</p>
+<p>执行命令：</p>
+<pre><code>wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.4/elasticsearch-2.3.4.tar.gz
+</code></pre><p>– 3.解压和配置elasticsearch</p>
+<p>解压执行：tar -zxvf elasticsearch-2.3.4.tar.gz<br>执行：cd elasticsearch-2.3.4 &amp;&amp; cd bin &amp;&amp; ./elasticsearch<br>执行之后，会出现问题提示：</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.RuntimeException: don&apos;t run elasticsearch as root.
+    at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:93)
+    at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:144)
+    at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:285)
+    at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:35)
+    Refer to the log for complete error details. 
+</code></pre><p>– 4.解决办法</p>
+<p>需要创建elasearch用户和用户组<br>创建组： groupadd elasearch<br>创建对应的用户： useradd elasearch -g elasearch -p rootsearch<br>回到elasticsearch-2.3.4的上级目录执行以下命令：<br>chown -R elasearch:elasearch elasticsearch-2.3.4/<br>切换到elasearch用户： su elasearch<br>进入bin目录执行 ：./elasticsearch -d<br>成功后，执行命令： curl localhost:9200,结果如下：</p>
+<pre><code>{
+&quot;name&quot; : &quot;Thog&quot;,
+&quot;cluster_name&quot; : &quot;elasticsearch&quot;,
+&quot;version&quot; : {
+&quot;number&quot; : &quot;2.3.4&quot;,
+&quot;build_hash&quot; : &quot;e455fd0c13dceca8dbbdbb1665d068ae55dabe3f&quot;,
+&quot;build_timestamp&quot; : &quot;2016-06-30T11:24:31Z&quot;,
+&quot;build_snapshot&quot; : false,
+&quot;lucene_version&quot; : &quot;5.5.0&quot;
+},
+&quot;tagline&quot; : &quot;You Know, for Search&quot;
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/05/20180505elasticsearch/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20180429" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/29/20180429/">互联网+和+互联网的理解</a>
+    </h1>
+  
+
+        <a href="/2018/04/29/20180429/" class="archive-article-date">
+  	<time datetime="2018-04-29T10:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-29</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>近年，“互联网+”成为了一个热门词，涌现出了很多互联网+企业，比如“互联网+零售”成就了淘宝和京东，“互联网+信息”成就了谷歌和百度、“互联网+内容”成就了乐视和优酷。现在“互联网+”已经被提升到了国家战略的高度、国务院也制定了“互联网+”行动计划，催生了各行各业的“互联网+”创新大潮。但是，如今的BATJ等互联网巨头已经非常强大，单一的“互联网+平台”模式很难生存和发展空间；相反，很多传统企业由于有实体和渠道支撑，业务向互联网延伸和模式创新就相对容易很多，因此，“+互联网”也就是“传统企业+互联网”成为了新的方向和潮流。但是传统企业互联网转型存在人才、技术及运营模式等方面的短板和不足，在转型的过程中，会遇到各种问题和挑战；因此需要搭建一个平台，通过这个平台实现互联网转型企业间的“分享、交流、合作”，即让转型成功的典范企业分享成功经验和问题挑战，转型企业之间能够通过这个平台进行更直接的交流和更有效的沟通，通过交流找到彼此之间的业务合作机会，从而促成这些企业之间的跨界合作。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/29/20180429/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-java-compiler-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/java-compiler-error/">compiler error 解决办法</a>
+    </h1>
+  
+
+        <a href="/2018/04/24/java-compiler-error/" class="archive-article-date">
+  	<time datetime="2018-04-24T04:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>编译项目，报Error:java: Compilation failed: internal java compiler error。
+原因是项目中jdk版本配置不一致，配成一致即可解决问题。
+</code></pre><ul>
+<li><p>查看项目的jdk（Ctrl+Alt+shift+S）</p>
+<p>  File -&gt;Project Structure-&gt;Project Settings -&gt;Project </p>
+<p>  <img src="/assets/blogImg/project_jdk.JPG" alt="project_jdk"></p>
+</li>
+<li><p>查看工程的jdk（Ctrl+Alt+shift+S）</p>
+<p>  File -&gt;Project Structure-&gt;Project Settings -&gt;module </p>
+<p>  <img src="/assets/blogImg/module_jdk.JPG" alt="module_jdk"></p>
+</li>
+<li><p>查看idea中java配置（Ctrl+Alt+S）</p>
+<p>  File -&gt;Settings&gt;Build,Execution,Deployment&gt;Compiler&gt;Java Compiler </p>
+<p>  <img src="/assets/blogImg/idea_jdk.jpg" alt="idea_jdk"></p>
+<p>  报错的原因就在这里，idea软件环境中Java版本的配置和之前项目的配置不一样，设置成一样的即可解决该问题。</p>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/24/java-compiler-error/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-active-idea2018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/24/active-idea2018/">intellij idea 2018 激活</a>
+    </h1>
+  
+
+        <a href="/2018/04/24/active-idea2018/" class="archive-article-date">
+  	<time datetime="2018-04-24T04:18:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首次启动的时候，选择license server ，输入下方链接：<br><a href="http://xdouble.cn:8888/" target="_blank" rel="external">http://xdouble.cn:8888/</a><br>点击activate即可</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/24/active-idea2018/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-config-aliyun-ECS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/23/config-aliyun-ECS/">阿里云ECS服务器java环境搭建</a>
+    </h1>
+  
+
+        <a href="/2018/04/23/config-aliyun-ECS/" class="archive-article-date">
+  	<time datetime="2018-04-23T05:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="jdk-配置"><a href="#jdk-配置" class="headerlink" title="jdk 配置"></a>jdk 配置</h2><ul>
+<li>下载jdk 到指定的目录 /temp</li>
+<li>解压到指定的目录：tar -zxvf jdk-8u161-linux-x64.tar.gz -C /usr/java</li>
+<li>执行命令：cd /usr/java/jdk1.8.0_161</li>
+<li>配置环境变量 ，执行 vim /etc/profile</li>
+<li><p>在/etc/profile末尾加上</p>
+<p>  export JAVA_HOME=/usr/java/jdk1.8.0_161</p>
+<p>  export CLASSPATH=$JAVA_HOME/lib/</p>
+<p>  export PATH=$PATH:$JAVA_HOME/bin</p>
+<p>  export JAVA_HOME PATH CLASSPATH</p>
+</li>
+<li><p>保存配置后，执行命令:source /etc/profile</p>
+</li>
+<li><p>查看是否jdk是否配置成功，执行命令：java -version 如果出现以下，说明配置成功。</p>
+<p> <img src="/assets/blogImg/jdk8.jpg" alt="jdk8"></p>
+</li>
+</ul>
+<h2 id="tomcat安装和运行"><a href="#tomcat安装和运行" class="headerlink" title="tomcat安装和运行"></a>tomcat安装和运行</h2><ul>
+<li>下载apache-tomcat 到指定的目录 /temp</li>
+<li>解压到指定的目录：tar -zxvf apache-tomcat-8.5.29.tar.gz -C /usr/tomcat</li>
+<li>执行命令：cd /usr/tomcat/apache-tomcat-8.5.29</li>
+<li><p>修改端口（也可以不操作），cd conf/,然后执行 vim server.xml,修改8080端口为9999，如下图：</p>
+<p><img src="/assets/blogImg/tomcat_port.JPG" alt="tomcat_port"></p>
+</li>
+<li><p>启动tomcat 服务，执行命令 cd ../bin—&gt;./startup.sh</p>
+</li>
+<li>验证是否启动成功，执行命令：curl localhost:9999,如果正常返回html，说明成功了。</li>
+<li><p>配置外网访问，需要在ECS配置入网规则，允许外网访问9999端口通过。操作过程：</p>
+<p>控制台–&gt;实例–&gt;管理–&gt;本实例安全组–&gt;安全组列表–&gt;配置规则–&gt;入方向–&gt;添加安全组规则，如下图:</p>
+<p><img src="/assets/blogImg/add_security_group.JPG" alt="add_security_group"></p>
+<p>点击确定，添加安全组成功后，就可以通过外网ip:9999访问tomcat了。</p>
+<h2 id="mysql安装和配置"><a href="#mysql安装和配置" class="headerlink" title="mysql安装和配置"></a>mysql安装和配置</h2></li>
+<li>检查一下原来是否安装过mysql,执行命令：yum list installed |grep mysql,如果结果为空，说明还没有安装，如果已经安装了，就卸载重新安装。</li>
+<li>下载mysql安装包，执行命令：rpm -ivh <a href="http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm" target="_blank" rel="external">http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</a></li>
+<li>安装mysql,执行命令：yum install -y mysql-server,如果显示 Complete! 说明安装成功。</li>
+<li>设置开机自启动服务：systemctl enable mysqld.service</li>
+<li><p>查看开机自启动是否生效：systemctl |grep mysqld,如果显示如下内容，表示生效了</p>
+<p>  mysqld.service    loaded active running   MySQL Server</p>
+</li>
+<li><p>设置开启服务 systemctl start mysqld.service</p>
+</li>
+<li>查看mysql的root用户初始化密码：grep ‘temporary password’ /var/log/mysqld.log </li>
+<li>登录mysql Server : mysql -uroot -pXXXXXX</li>
+<li>mysql 登录成功后，修改密码：mysql&gt;set PASSWORD=PASSWORD(‘new password’);</li>
+<li>为root登录开启远程登录：mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘xxxxx’ WITH GRANT OPTION;</li>
+<li>命令立即执行生效：mysql&gt;flush privileges;</li>
+<li>查看mysql服务状态：systemctl status mysqld;</li>
+<li>启动mysql服务：systemctl start mysqld;</li>
+<li>停止mysql服务：systemctl stop mysqld;</li>
+<li>通过本地的mysql客户端，例如navicat 连接ECS服务器上的mysql,需要配置入网访问规则，运行默认端口3306可以通过外网访问，设置参考tomcat配置规则。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/23/config-aliyun-ECS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-hexo-trouble" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/hexo-trouble/">hexo deploy 提示 permission denied的解决方法</a>
+    </h1>
+  
+
+        <a href="/2018/04/22/hexo-trouble/" class="archive-article-date">
+  	<time datetime="2018-04-22T14:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>出现的问题</p>
+<p>  hexo deploy ,提示Error: Permission denied (publikey),如下图：</p>
+<p> <img src="assets/blogImg/public_key_error.JPG" alt="error"></p>
+</li>
+<li><p>查看用户配置的ssh的public key 是否存在</p>
+<p>  执行命令： ssh -vT git@github.com,结果如下：</p>
+<p><img src="assets/blogImg/testkeyfailue.JPG" alt="testkeyfailue"></p>
+<p>  提示 permission denied<br>  进入 cd ~/.ssh,查看没有 id_rsa id_rsa_pub ,所以需要生成public_key。</p>
+</li>
+<li><p>生成publish key</p>
+<p>使用Git Bash生成新的ssh key。</p>
+</li>
+</ul>
+<p>$ cd ~  #保证当前路径在”~”下</p>
+<p>$ ssh-keygen -t rsa -C “xxxxxx@yy.com”  #建议填写自己真实有效的邮箱地址</p>
+<p>Generating public/private rsa key pair.</p>
+<p>Enter file in which to save the key (/c/Users/xxxx_000/.ssh/id_rsa):   #不填直接回车</p>
+<p>Enter passphrase (empty for no passphrase):   #输入密码（可以为空）</p>
+<p>Enter same passphrase again:   #再次确认密码（可以为空）</p>
+<p>成功的生成如下提示：</p>
+<p> <img src="assets/blogImg/generatekey.JPG" alt="testkeyfailue"></p>
+<ul>
+<li>添加 ssh key 到 Github</li>
+</ul>
+<p>登录GitHub系统；点击右上角账号头像的“▼”→Settings→SSH and GPG keys→New SSH key<br>进入c:/Users/xxxx_000/.ssh/目录下，打开id_rsa.pub文件，全选复制公钥内容。<br>把复制的内容放入key中，Title 自定义，点击确定。</p>
+<ul>
+<li>验证public key 是否生效</li>
+</ul>
+<p>再次执行 $ ssh -vT “xxxxxx@yy.com”,成功了提示 success,效果如下：</p>
+<p> <img src="assets/blogImg/testsuccess.JPG" alt="testsuccess"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/04/22/hexo-trouble/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-postFor2017041601" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/16/postFor2017041601/">放松心情的时候，可以听听</a>
+    </h1>
+  
+
+        <a href="/2017/04/16/postFor2017041601/" class="archive-article-date">
+  	<time datetime="2017-04-16T11:04:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-16</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="450" src="//music.163.com/outchain/player?type=0&id=364919830&auto=1&height=430"></iframe>    
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/16/postFor2017041601/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-postfor20170416" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -203,229 +799,9 @@
 
 
   
-    <article id="post-20161221post1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/21/20161221post1/">年轻程序员和大龄程序员</a>
-    </h1>
-  
-
-        <a href="/2016/12/21/20161221post1/" class="archive-article-date">
-  	<time datetime="2016-12-21T13:49:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-21</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这个时代很残酷也相对公平，残酷的地方在于世界的变化之快容不得人有片刻懈怠，公平的地方在于：不论你是年轻还是年老，都要靠实力说话。那些被时代抛弃的永远都是跑得比较慢甚至在原地徘徊的人，即所谓工作十年却只有一年的工作经验。</p>
-<p>年轻程序员的优势在于年轻和激情， 大龄程序员的优势在于阅历和经验。所以，年轻程序员不要有跨越年龄阶段的焦虑，大龄程序员也不要觉得年轻人抢了自己的饭碗。每个年龄段都要有自己要解决和面临的问题，认清自己内心真正的需求和渴望，再去寻找适合自己的栖身之欸打怪升级，才是当务之急。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/21/20161221post1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-post-20161219" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/19/post-20161219/">为博客绑定域名</a>
-    </h1>
-  
-
-        <a href="/2016/12/19/post-20161219/" class="archive-article-date">
-  	<time datetime="2016-12-19T15:25:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-19</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 今天从万网买了一个域名，配置了域名解析，指向了github Pages 库，但是通过域名登陆后，老是解析不成功，<br>原因可能是没有实名认证，访问的域名被安全局锁定。没办法，最多要等3天，期待好消息。同时要感谢我的<a href="hellomypastor.net">同事</a><br>的帮助。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/19/post-20161219/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-firstPoster20161218" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/18/firstPoster20161218/">纪念一下，第一次发博客</a>
-    </h1>
-  
-
-        <a href="/2016/12/18/firstPoster20161218/" class="archive-article-date">
-  	<time datetime="2016-12-18T15:37:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-18</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>个人的博客第一篇内容，mark 一下，希望以后继续坚持下去。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/18/firstPoster20161218/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/18/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <a href="/2016/12/18/hello-world/" class="archive-article-date">
-  	<time datetime="2016-12-18T10:56:38.573Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-18</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/18/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 
@@ -437,7 +813,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 William Cai
+    		&copy; 2019 William Cai
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten

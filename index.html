@@ -149,6 +149,574 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-2019090301" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/03/2019090301/">diskpart的使用</a>
+    </h1>
+  
+
+        <a href="/2019/09/03/2019090301/" class="archive-article-date">
+  	<time datetime="2019-09-03T14:17:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="mount-a-disk-to-another-disk"><a href="#mount-a-disk-to-another-disk" class="headerlink" title="mount a disk to  another disk"></a>mount a disk to  another disk</h3><pre><code>&gt; diskpart
+&gt; list vol  /*list all volume*/
+&gt; select vol=3
+&gt; remove 
+&gt; assign mount=c:\mnt   /*vol=3 mount to c:\mnt*/
+</code></pre><h3 id="remove-mount"><a href="#remove-mount" class="headerlink" title="remove mount"></a>remove mount</h3><pre><code>&gt; diskpart
+&gt; list vol
+&gt; remove mount=c:\mnt
+&gt; select vol=3
+&gt; assign mount=f:
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/03/2019090301/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-2019032402" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/2019032402/">springboot调度任务</a>
+    </h1>
+  
+
+        <a href="/2019/03/24/2019032402/" class="archive-article-date">
+  	<time datetime="2019-03-24T08:39:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>基于注解配置</li>
+</ul>
+<p>-</p>
+<pre><code>@EnableScheduling  开启调度
+@EnableAsync       开启异步线程
+public class EnvironmentTestController {
+
+/@Scheduled(cron = &quot;*/5 * * * * ?&quot;) 单位为毫秒数
+@Scheduled(fixedRate = 5000) 可以设置固定间隔毫秒数
+@Async        开启多个任务的时候，多个线程处理
+public  void printCount(){
+    System.out.println(Thread.currentThread().getName());
+    //System.out.println(&quot;Count:&quot;+Count);
+}
+
+}
+</code></pre><ul>
+<li>cron 表达式</li>
+</ul>
+<p>Cron表达式参数分别表示：</p>
+<p>秒（0~59） 例如0/5表示从零开始，每隔5秒<br>分（0~59）<br>时（0~23）<br>日（0~31）的某天，需计算<br>月（0~11）<br>周几（ 可填1-7 或 SUN/MON/TUE/WED/THU/FRI/SAT）<br><em>表示任意<br>？表示不确定<br>n/m 表示从n开始，每隔m<br>@Scheduled：除了支持灵活的参数表达式cron之外，还支持简单的延时操作，例如 fixedDelay ，fixedRate 填写相应的毫秒数即可。<br>每隔一分钟： </em> 0/1 <em> </em> * ？</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/24/2019032402/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-2019032401" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/24/2019032401/">jconsole 查看springboot 项目</a>
+    </h1>
+  
+
+        <a href="/2019/03/24/2019032401/" class="archive-article-date">
+  	<time datetime="2019-03-24T01:19:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>需要在启动参数里配置如下：</li>
+<li><p> -Dcom.sun.management.jmxremote.authenticate=”false”<br> -Dcom.sun.management.jmxremote.ssl=”false”<br> -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=”6017”</p>
+</li>
+</ul>
+<ul>
+<li><p>ctrl+r启动 jconsole ,如下图所示：</p>
+<p>– 登录界面</p>
+<p><img src="/assets/blogImg/jconsole_login.JPG" alt="jconsole_login"></p>
+</li>
+</ul>
+<p> – 登录后的面板</p>
+<p> <img src="/assets/blogImg/jconsole_board.JPG" alt="jconsole_board"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/24/2019032401/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20190220love" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/20/20190220love/">读《深入理解Java虚拟机》有感之4</a>
+    </h1>
+  
+
+        <a href="/2019/02/20/20190220love/" class="archive-article-date">
+  	<time datetime="2019-02-20T11:50:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-20</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>对象的创建</li>
+</ul>
+<p>（1）虚拟机遇到new的指令时，首先从常量池查看是否有类的常量符号引用，并且检查这个符号引用代表的类是否已经加载，解析和初始化过，如果没有的话，就会启动类的加载。在类加载检查通过后，接下来虚拟机为新生的对象分配内存，分配内存的过程就是在堆中划分一块内存出来。为了加快对象的内存分配，防止指针的不安全，通常是使用TLAB（本地线程缓冲），可以使用参数-XX:+UseTLAB设置。</p>
+<p>（2）内存分配完成后，虚拟机需要保证将分配的内存空间都设置为零值（不包括对象头），这样即使没有初始化，也可以访问数据为零值；</p>
+<p>（3）接下来要是设置对象头，对象头内容有：元数据信息，对象的哈希码，对象的GC分代年龄等信息；</p>
+<p>（4）在上面完成之后，一个新的对象产生了，但是还没有init(),所有字段值为零；初始化之后就有值；</p>
+<ul>
+<li>对象的布局</li>
+</ul>
+<p>对象布局可以分为3部分：对象头，实例数据和对齐填充；<br>（1） 对象头：一个为Mark world:hash,gc年代等数据，一个为类的指针，确定这个对象为那个类型的实例；如果是数组的话，还有一个字段存储数组长度；<br>（2）实例数据，无论是从父类继承下来的，还是在子类中定义的，都需要记录起来；这部分存储顺序收到分配策略影响，Hotspot虚拟机默认的策略是相同宽度的字段总是被分配到一起，在此基础之上父类的字段出现在子类之前；</p>
+<p>（3）对象填充并不是必然存在的，也没有特殊的含义，只是起着占位符的作用，由于HotspotVM 内存管理系统的要求对象的起始地址必须是8字节倍数；所以没有对齐的，就需要补充。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/20/20190220love/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20190214love" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/14/20190214love/">读《深入理解Java虚拟机》有感之3</a>
+    </h1>
+  
+
+        <a href="/2019/02/14/20190214love/" class="archive-article-date">
+  	<time datetime="2019-02-14T14:52:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-14</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>虚拟机栈</p>
+<p>如果线程请求的栈深度大于虚拟机所允许的深度，将抛出StackOverflowError 异常；如果虚拟机栈可以动态扩展，如果扩展时无法申请到足够的内存，就会抛出OutOfMemoryError异常。</p>
+</li>
+<li><p>本地方法栈</p>
+</li>
+</ul>
+<p>其作用与虚拟机栈基本相似，区别是虚拟机栈为虚拟机执行java方法服务，二本地方法栈则为虚拟机使用到Native方法服务；与虚拟机方法栈一样，本地方法栈也会抛出StackOverflowError和OutOfMemoryError异常。</p>
+<ul>
+<li>Java 堆</li>
+</ul>
+<p>Java堆主要为类和数组实例分配内存；如果堆是可以扩展的，如果堆中没有内存分配，并且堆也无法扩展时，将会抛出OutOfMemoryError异常；</p>
+<ul>
+<li>方法区</li>
+</ul>
+<p>该区又称”永久代”，主要存储已被虚拟机加载的类信息，常量，静态变量，JIT编译后的代码等数据。当方法区无法完成内存分配要求，也将抛出<br>OutOfMemoryError异常。</p>
+<ul>
+<li>运行时常量池</li>
+</ul>
+<p>运行时常量池是方法区的一部分，用于存放编译期生成的各种字面量和符号引用。既然运行时常量池是方法区的一部分，自然就会收到方法区内存的限制，当常量池无法再申请到内存时会抛出OutOfMemoryError异常。</p>
+<ul>
+<li>直接内存</li>
+</ul>
+<p>直接内存是jvm之外的内存，受到本机内存的限制，如果分配的内存无法满足时，就会抛出OutOfMemoryError异常。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/14/20190214love/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20190212love" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/12/20190212love/">读《深入理解Java虚拟机有感》之2</a>
+    </h1>
+  
+
+        <a href="/2019/02/12/20190212love/" class="archive-article-date">
+  	<time datetime="2019-02-12T14:21:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>java把内存的分配和回收交给了虚拟机，工程师不用自己手动释放内存，这样就带来了一个不好的事情，一旦发生内存异常和溢出，如果对jvm<br>内存原理不够精通的话，排查问题就是一件痛苦的工作。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/12/20190212love/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-20190211love" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/11/20190211love/">读《深入理解Java虚拟机有感》之1</a>
+    </h1>
+  
+
+        <a href="/2019/02/11/20190211love/" class="archive-article-date">
+  	<time datetime="2019-02-11T13:33:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-11</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>理解java虚拟机的理由</li>
+</ul>
+<p>   (1) 理解jvm运行原理，可以编写高质量的代码。</p>
+<p>   (2) jvm 接管了内存，好处是可以不用担心内存释放的问题，但是出现内存泄漏的情况，就必须<br>   深入理解jvm,才能更好的定位和解决问题。</p>
+<p>   (3) jvm 未来朝着模块化和支持多核方向发展，编写lamda函数式编程可以更好的支持多核，理解jvm<br>   有助于知其然，知其所以然。</p>
+<p>   (4) 目前显卡的算术运算能力，并行能力已经远远超过了CPU，在图形领域以外发掘显卡的潜力是近几年计算机发展的方向之一。Java的项目Sumatra就是提供GPU和APU运算能力的工具，以后她将直接提供java语言层面的API。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/02/11/20190211love/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-jingdianlaogefor20190110" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/10/jingdianlaogefor20190110/">经典老歌，久听不厌</a>
+    </h1>
+  
+
+        <a href="/2019/01/10/jingdianlaogefor20190110/" class="archive-article-date">
+  	<time datetime="2019-01-10T13:48:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-01-10</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="450" src="//music.163.com/outchain/player?type=0&id=988690134&auto=1&height=430"></iframe>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/01/10/jingdianlaogefor20190110/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-2018062401" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/06/24/2018062401/">读《从0开始学架构》有感-开篇</a>
+    </h1>
+  
+
+        <a href="/2018/06/24/2018062401/" class="archive-article-date">
+  	<time datetime="2018-06-24T07:50:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-24</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>每个人程序员都有一个架构师梦想，但是梦想是美好的，现实却是残酷的。</p>
+<h1 id="架构没有想象中的简单，它有几个特性："><a href="#架构没有想象中的简单，它有几个特性：" class="headerlink" title="架构没有想象中的简单，它有几个特性："></a>架构没有想象中的简单，它有几个特性：</h1><h2 id="1、架构设计的思维和程序设计的思维差异很大"><a href="#1、架构设计的思维和程序设计的思维差异很大" class="headerlink" title="1、架构设计的思维和程序设计的思维差异很大"></a>1、架构设计的思维和程序设计的思维差异很大</h2><ul>
+<li>架构设计的关键思维是判断和取舍，程序设计的关键思维是逻辑与实现。要从程序员转变成架构师，就必须转变思维；同理穷人和富人的思维也不同，要成为富人必须有富人的思维。</li>
+</ul>
+<h2 id="2、架构设计没有体系化的培训和训练机制"><a href="#2、架构设计没有体系化的培训和训练机制" class="headerlink" title="2、架构设计没有体系化的培训和训练机制"></a>2、架构设计没有体系化的培训和训练机制</h2><ul>
+<li>大学几乎没有架构设计的相关课程，也没有体系化的相关书籍，只能依靠自己摸索，效率低，容易采坑。</li>
+</ul>
+<h2 id="3、程序员对架构设计存在很大误区"><a href="#3、程序员对架构设计存在很大误区" class="headerlink" title="3、程序员对架构设计存在很大误区"></a>3、程序员对架构设计存在很大误区</h2><ul>
+<li>要成为架构师必须要有很强的技术天分；架构师要有很强的创造力；架构设计必须要高大上才能体现架构师设计能力；架构一定要具备高可用、高性能…这些似似而非的误区。</li>
+</ul>
+<h1 id="通过学习《从0开始学习架构》，我可以收获："><a href="#通过学习《从0开始学习架构》，我可以收获：" class="headerlink" title="通过学习《从0开始学习架构》，我可以收获："></a>通过学习《从0开始学习架构》，我可以收获：</h1><ul>
+<li>清楚的理解架构设计的本质、概念、目的，避免架构师在实践过程中把握不住重点、分不清主次，眉毛胡子一把抓，导致架构设计的四不像。</li>
+<li>掌握架构设计的通用原则，无论何种业务或技术，架构师在判断和选择的时候有一套方法论可以参考，避免架构设计举棋不定，或者拍脑袋式设计。</li>
+<li>掌握标准的架构设计流程，即使是刚开始做技术架构，也能够按照架构一步一步设计出合适的架构，避免某些步骤缺失导致错误的架构设计。</li>
+<li>深入理解已有的架构模式，做到架构特点快速挑选合适的模式完成架构设计，或者在已有的模式上进行创新，或者将已有的模式组合出新的架构。</li>
+<li>掌握架构演进和开源系统使用的一些技巧。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/06/24/2018062401/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-201806171029" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -156,7 +724,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/17/201806171029/">201806171029</a>
+      <a class="article-title" href="/2018/06/17/201806171029/">分库分表总结</a>
     </h1>
   
 
@@ -167,7 +735,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="为什么要分库分表"><a href="#为什么要分库分表" class="headerlink" title="为什么要分库分表"></a>为什么要分库分表</h2><p>当存储数据过多，性能下降，无法满足正常的业务需求的时候，就需要将单个空间拆分成多个，分担单个个体的压力，缩短响应时间，提高性能。<br>分库分表，顾名思义，是两个操作。<br>分库，拆分成多个数据库，分表，拆分成多张表。<br>常见方式有：单库单表-&gt;单库多表-&gt;多库多表。</p>
+<h2 id="如何进行数据拆分"><a href="#如何进行数据拆分" class="headerlink" title="如何进行数据拆分"></a>如何进行数据拆分</h2><p>最简单的方式就是按照ID将数据分配到不同的库不同的表中。<br>当你创建一条记录时，就会根据生成的ID计算这条数据放到哪个库哪张表里去。</p>
+<h2 id="分库分表路由规则"><a href="#分库分表路由规则" class="headerlink" title="分库分表路由规则"></a>分库分表路由规则</h2><p>假如有16个库（从00库到15库），每个库有64张表，那一共就是有1024张表（从0000-1023）<br>对应的路由规则：<br>dbRule=id%1024%64<br>tbRule=id%1024<br>那么对应的库为dbName_dbRule<br>对应的表为：tbName_tbRule</p>
+<h3 id="常见的方式"><a href="#常见的方式" class="headerlink" title="常见的方式"></a>常见的方式</h3><ul>
+<li>简单ID取模</li>
+<li>字符串hash取模</li>
+</ul>
+<h2 id="分表键的问题"><a href="#分表键的问题" class="headerlink" title="分表键的问题"></a>分表键的问题</h2><p>选择谁作为分表键，这涉及到数据库的可扩展性，是否便于查询，能够避免跨库事务等，如果数据老是落到特定的数据库表中，那就分库分表就没有意义了。<br>这个问题没有明确的答案，必须根据实际业务来确定。建议分表键尽可能找到数据表中的数据在业务逻辑上的主体，并确定大部分的数据库围绕这个主体的数据进行。如果一个分表键无法解决，可以使用2个，尽量越少越好。</p>
+<h2 id="分库分表存在的问题"><a href="#分库分表存在的问题" class="headerlink" title="分库分表存在的问题"></a>分库分表存在的问题</h2><ul>
+<li>数据按照用户划分，就会造成跨库事务问题。</li>
+<li>原来所有的单库单表的sql都要进行改造，加入appId分表键。</li>
+<li>汇总分库分表的数据，要跨越多个库，是一个问题。</li>
+</ul>
+
       
 
       
@@ -197,605 +778,9 @@
 
 
   
-    <article id="post-20180604" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/06/04/20180604/">Git的简单使用</a>
-    </h1>
-  
-
-        <a href="/2018/06/04/20180604/" class="archive-article-date">
-  	<time datetime="2018-06-04T14:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-04</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###如果没有初始化的项目，可以通过以下步骤：</p>
-<pre><code>$echo &quot;# kotlinPrimary&quot; &gt;&gt; README.md
-$git init
-$git add README.md
-$git commit -m &quot;first commit&quot;
-$git remote add origin git@github.com:williamcai663/$kotlinPrimary.git
-$git push -u origin master
-</code></pre><p>这样就可以把项目推到库中并生成且提交到master</p>
-<p>###如果存在一个库的项目，直接执行如下命令：<br>    $git remote add origin git@github.com:williamcai663/kotlinPrimary.git<br>    $git push -u origin master</p>
-<p>###如果想从master上开一个develop分支，可以执行如下：<br>    $git checkout -b develop<br>-b 的作用就是创建并切换到develop分支<br>这个新开的分支并没有关联到远程分支，创建远程分支并提交到远程，执行 git push origin develop<br>这样远程就有了一个分支，并且与远程的分支develop没有关联上，<br>可以通过执行如下命令：</p>
-<pre><code>$git branch --set-upstream-to=origin/develop develop
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/06/04/20180604/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-20180506elasticsearch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/06/20180506elasticsearch/">ubuntu搭建elasticsearch和使用</a>
-    </h1>
-  
-
-        <a href="/2018/05/06/20180506elasticsearch/" class="archive-article-date">
-  	<time datetime="2018-05-06T06:53:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-06</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>參考 ：<a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/06/20180506elasticsearch/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-20180505elasticsearch" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/05/20180505elasticsearch/">elasticsearch的安裝</a>
-    </h1>
-  
-
-        <a href="/2018/05/05/20180505elasticsearch/" class="archive-article-date">
-  	<time datetime="2018-05-05T13:58:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-05</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>– 1.检查jdk安装</p>
-<p>执行命令：java -version<br>如果有java相关信息，说明已经安装。<br>如果没有安装的话，执行命令：yum -y install  java-1.8.0-openjdk<br>– 2.下载elasticsearch安装包</p>
-<p>执行命令：</p>
-<pre><code>wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.3.4/elasticsearch-2.3.4.tar.gz
-</code></pre><p>– 3.解压和配置elasticsearch</p>
-<p>解压执行：tar -zxvf elasticsearch-2.3.4.tar.gz<br>执行：cd elasticsearch-2.3.4 &amp;&amp; cd bin &amp;&amp; ./elasticsearch<br>执行之后，会出现问题提示：</p>
-<pre><code>Exception in thread &quot;main&quot; java.lang.RuntimeException: don&apos;t run elasticsearch as root.
-    at org.elasticsearch.bootstrap.Bootstrap.initializeNatives(Bootstrap.java:93)
-    at org.elasticsearch.bootstrap.Bootstrap.setup(Bootstrap.java:144)
-    at org.elasticsearch.bootstrap.Bootstrap.init(Bootstrap.java:285)
-    at org.elasticsearch.bootstrap.Elasticsearch.main(Elasticsearch.java:35)
-    Refer to the log for complete error details. 
-</code></pre><p>– 4.解决办法</p>
-<p>需要创建elasearch用户和用户组<br>创建组： groupadd elasearch<br>创建对应的用户： useradd elasearch -g elasearch -p rootsearch<br>回到elasticsearch-2.3.4的上级目录执行以下命令：<br>chown -R elasearch:elasearch elasticsearch-2.3.4/<br>切换到elasearch用户： su elasearch<br>进入bin目录执行 ：./elasticsearch -d<br>成功后，执行命令： curl localhost:9200,结果如下：</p>
-<pre><code>{
-&quot;name&quot; : &quot;Thog&quot;,
-&quot;cluster_name&quot; : &quot;elasticsearch&quot;,
-&quot;version&quot; : {
-&quot;number&quot; : &quot;2.3.4&quot;,
-&quot;build_hash&quot; : &quot;e455fd0c13dceca8dbbdbb1665d068ae55dabe3f&quot;,
-&quot;build_timestamp&quot; : &quot;2016-06-30T11:24:31Z&quot;,
-&quot;build_snapshot&quot; : false,
-&quot;lucene_version&quot; : &quot;5.5.0&quot;
-},
-&quot;tagline&quot; : &quot;You Know, for Search&quot;
-}
-</code></pre>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/05/05/20180505elasticsearch/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-20180429" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/29/20180429/">互联网+和+互联网的理解</a>
-    </h1>
-  
-
-        <a href="/2018/04/29/20180429/" class="archive-article-date">
-  	<time datetime="2018-04-29T10:34:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-29</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>近年，“互联网+”成为了一个热门词，涌现出了很多互联网+企业，比如“互联网+零售”成就了淘宝和京东，“互联网+信息”成就了谷歌和百度、“互联网+内容”成就了乐视和优酷。现在“互联网+”已经被提升到了国家战略的高度、国务院也制定了“互联网+”行动计划，催生了各行各业的“互联网+”创新大潮。但是，如今的BATJ等互联网巨头已经非常强大，单一的“互联网+平台”模式很难生存和发展空间；相反，很多传统企业由于有实体和渠道支撑，业务向互联网延伸和模式创新就相对容易很多，因此，“+互联网”也就是“传统企业+互联网”成为了新的方向和潮流。但是传统企业互联网转型存在人才、技术及运营模式等方面的短板和不足，在转型的过程中，会遇到各种问题和挑战；因此需要搭建一个平台，通过这个平台实现互联网转型企业间的“分享、交流、合作”，即让转型成功的典范企业分享成功经验和问题挑战，转型企业之间能够通过这个平台进行更直接的交流和更有效的沟通，通过交流找到彼此之间的业务合作机会，从而促成这些企业之间的跨界合作。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/29/20180429/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-java-compiler-error" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/java-compiler-error/">compiler error 解决办法</a>
-    </h1>
-  
-
-        <a href="/2018/04/24/java-compiler-error/" class="archive-article-date">
-  	<time datetime="2018-04-24T04:22:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>编译项目，报Error:java: Compilation failed: internal java compiler error。
-原因是项目中jdk版本配置不一致，配成一致即可解决问题。
-</code></pre><ul>
-<li><p>查看项目的jdk（Ctrl+Alt+shift+S）</p>
-<p>  File -&gt;Project Structure-&gt;Project Settings -&gt;Project </p>
-<p>  <img src="/assets/blogImg/project_jdk.JPG" alt="project_jdk"></p>
-</li>
-<li><p>查看工程的jdk（Ctrl+Alt+shift+S）</p>
-<p>  File -&gt;Project Structure-&gt;Project Settings -&gt;module </p>
-<p>  <img src="/assets/blogImg/module_jdk.JPG" alt="module_jdk"></p>
-</li>
-<li><p>查看idea中java配置（Ctrl+Alt+S）</p>
-<p>  File -&gt;Settings&gt;Build,Execution,Deployment&gt;Compiler&gt;Java Compiler </p>
-<p>  <img src="/assets/blogImg/idea_jdk.jpg" alt="idea_jdk"></p>
-<p>  报错的原因就在这里，idea软件环境中Java版本的配置和之前项目的配置不一样，设置成一样的即可解决该问题。</p>
-</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/java-compiler-error/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-active-idea2018" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/24/active-idea2018/">intellij idea 2018 激活</a>
-    </h1>
-  
-
-        <a href="/2018/04/24/active-idea2018/" class="archive-article-date">
-  	<time datetime="2018-04-24T04:18:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-24</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首次启动的时候，选择license server ，输入下方链接：<br><a href="http://xdouble.cn:8888/" target="_blank" rel="external">http://xdouble.cn:8888/</a><br>点击activate即可</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/24/active-idea2018/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-config-aliyun-ECS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/23/config-aliyun-ECS/">阿里云ECS服务器java环境搭建</a>
-    </h1>
-  
-
-        <a href="/2018/04/23/config-aliyun-ECS/" class="archive-article-date">
-  	<time datetime="2018-04-23T05:16:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="jdk-配置"><a href="#jdk-配置" class="headerlink" title="jdk 配置"></a>jdk 配置</h2><ul>
-<li>下载jdk 到指定的目录 /temp</li>
-<li>解压到指定的目录：tar -zxvf jdk-8u161-linux-x64.tar.gz -C /usr/java</li>
-<li>执行命令：cd /usr/java/jdk1.8.0_161</li>
-<li>配置环境变量 ，执行 vim /etc/profile</li>
-<li><p>在/etc/profile末尾加上</p>
-<p>  export JAVA_HOME=/usr/java/jdk1.8.0_161</p>
-<p>  export CLASSPATH=$JAVA_HOME/lib/</p>
-<p>  export PATH=$PATH:$JAVA_HOME/bin</p>
-<p>  export JAVA_HOME PATH CLASSPATH</p>
-</li>
-<li><p>保存配置后，执行命令:source /etc/profile</p>
-</li>
-<li><p>查看是否jdk是否配置成功，执行命令：java -version 如果出现以下，说明配置成功。</p>
-<p> <img src="/assets/blogImg/jdk8.jpg" alt="jdk8"></p>
-</li>
-</ul>
-<h2 id="tomcat安装和运行"><a href="#tomcat安装和运行" class="headerlink" title="tomcat安装和运行"></a>tomcat安装和运行</h2><ul>
-<li>下载apache-tomcat 到指定的目录 /temp</li>
-<li>解压到指定的目录：tar -zxvf apache-tomcat-8.5.29.tar.gz -C /usr/tomcat</li>
-<li>执行命令：cd /usr/tomcat/apache-tomcat-8.5.29</li>
-<li><p>修改端口（也可以不操作），cd conf/,然后执行 vim server.xml,修改8080端口为9999，如下图：</p>
-<p><img src="/assets/blogImg/tomcat_port.JPG" alt="tomcat_port"></p>
-</li>
-<li><p>启动tomcat 服务，执行命令 cd ../bin—&gt;./startup.sh</p>
-</li>
-<li>验证是否启动成功，执行命令：curl localhost:9999,如果正常返回html，说明成功了。</li>
-<li><p>配置外网访问，需要在ECS配置入网规则，允许外网访问9999端口通过。操作过程：</p>
-<p>控制台–&gt;实例–&gt;管理–&gt;本实例安全组–&gt;安全组列表–&gt;配置规则–&gt;入方向–&gt;添加安全组规则，如下图:</p>
-<p><img src="/assets/blogImg/add_security_group.JPG" alt="add_security_group"></p>
-<p>点击确定，添加安全组成功后，就可以通过外网ip:9999访问tomcat了。</p>
-<h2 id="mysql安装和配置"><a href="#mysql安装和配置" class="headerlink" title="mysql安装和配置"></a>mysql安装和配置</h2></li>
-<li>检查一下原来是否安装过mysql,执行命令：yum list installed |grep mysql,如果结果为空，说明还没有安装，如果已经安装了，就卸载重新安装。</li>
-<li>下载mysql安装包，执行命令：rpm -ivh <a href="http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm" target="_blank" rel="external">http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm</a></li>
-<li>安装mysql,执行命令：yum install -y mysql-server,如果显示 Complete! 说明安装成功。</li>
-<li>设置开机自启动服务：systemctl enable mysqld.service</li>
-<li><p>查看开机自启动是否生效：systemctl |grep mysqld,如果显示如下内容，表示生效了</p>
-<p>  mysqld.service    loaded active running   MySQL Server</p>
-</li>
-<li><p>设置开启服务 systemctl start mysqld.service</p>
-</li>
-<li>查看mysql的root用户初始化密码：grep ‘temporary password’ /var/log/mysqld.log </li>
-<li>登录mysql Server : mysql -uroot -pXXXXXX</li>
-<li>mysql 登录成功后，修改密码：mysql&gt;set PASSWORD=PASSWORD(‘new password’);</li>
-<li>为root登录开启远程登录：mysql&gt;GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@’%’ IDENTIFIED BY ‘xxxxx’ WITH GRANT OPTION;</li>
-<li>命令立即执行生效：mysql&gt;flush privileges;</li>
-<li>查看mysql服务状态：systemctl status mysqld;</li>
-<li>启动mysql服务：systemctl start mysqld;</li>
-<li>停止mysql服务：systemctl stop mysqld;</li>
-<li>通过本地的mysql客户端，例如navicat 连接ECS服务器上的mysql,需要配置入网访问规则，运行默认端口3306可以通过外网访问，设置参考tomcat配置规则。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/23/config-aliyun-ECS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-hexo-trouble" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/22/hexo-trouble/">hexo deploy 提示 permission denied的解决方法</a>
-    </h1>
-  
-
-        <a href="/2018/04/22/hexo-trouble/" class="archive-article-date">
-  	<time datetime="2018-04-22T14:17:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-22</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>出现的问题</p>
-<p>  hexo deploy ,提示Error: Permission denied (publikey),如下图：</p>
-<p> <img src="assets/blogImg/public_key_error.JPG" alt="error"></p>
-</li>
-<li><p>查看用户配置的ssh的public key 是否存在</p>
-<p>  执行命令： ssh -vT git@github.com,结果如下：</p>
-<p><img src="assets/blogImg/testkeyfailue.JPG" alt="testkeyfailue"></p>
-<p>  提示 permission denied<br>  进入 cd ~/.ssh,查看没有 id_rsa id_rsa_pub ,所以需要生成public_key。</p>
-</li>
-<li><p>生成publish key</p>
-<p>使用Git Bash生成新的ssh key。</p>
-</li>
-</ul>
-<p>$ cd ~  #保证当前路径在”~”下</p>
-<p>$ ssh-keygen -t rsa -C “xxxxxx@yy.com”  #建议填写自己真实有效的邮箱地址</p>
-<p>Generating public/private rsa key pair.</p>
-<p>Enter file in which to save the key (/c/Users/xxxx_000/.ssh/id_rsa):   #不填直接回车</p>
-<p>Enter passphrase (empty for no passphrase):   #输入密码（可以为空）</p>
-<p>Enter same passphrase again:   #再次确认密码（可以为空）</p>
-<p>成功的生成如下提示：</p>
-<p> <img src="assets/blogImg/generatekey.JPG" alt="testkeyfailue"></p>
-<ul>
-<li>添加 ssh key 到 Github</li>
-</ul>
-<p>登录GitHub系统；点击右上角账号头像的“▼”→Settings→SSH and GPG keys→New SSH key<br>进入c:/Users/xxxx_000/.ssh/目录下，打开id_rsa.pub文件，全选复制公钥内容。<br>把复制的内容放入key中，Title 自定义，点击确定。</p>
-<ul>
-<li>验证public key 是否生效</li>
-</ul>
-<p>再次执行 $ ssh -vT “xxxxxx@yy.com”,成功了提示 success,效果如下：</p>
-<p> <img src="assets/blogImg/testsuccess.JPG" alt="testsuccess"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/04/22/hexo-trouble/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-postFor2017041601" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/16/postFor2017041601/">放松心情的时候，可以听听</a>
-    </h1>
-  
-
-        <a href="/2017/04/16/postFor2017041601/" class="archive-article-date">
-  	<time datetime="2017-04-16T11:04:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-16</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="600" height="450" src="//music.163.com/outchain/player?type=0&id=364919830&auto=1&height=430"></iframe>    
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags"></i>
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/16/postFor2017041601/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -807,7 +792,7 @@ $git push -u origin master
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2018 William Cai
+    		&copy; 2019 William Cai
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
