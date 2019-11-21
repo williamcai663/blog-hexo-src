@@ -1,2 +1,6 @@
 /node_modules/*
 /public/*
+/package.json
+/package-lock.json
+/db.json
+/.deploy_git
