@@ -72,7 +72,7 @@ duoshuo_shortname: williamcai663
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git  
-  repo: git@github.com:williamcai663/williamcai663.github.io.git
+  repo: https://github.com/williamcai663/williamcai663.github.io.git
   branch: master
   message: "first deploy"
 
